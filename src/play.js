@@ -205,9 +205,10 @@ export default function Play(_md) {
   this.lineDepth = games.lineDepth;
 
   this.export = () => {
+    let depths = exportDepths();
     return {
-      fens: exportFens(),
-      depths: exportDepths()
+      fens: exportFens(depths),
+      depths
     };
   };
 
@@ -219,7 +220,7 @@ export default function Play(_md) {
     });
   }
 
-  function exportFens() {
+  function exportFens(depths) {
     let res = {};
 
     objForeach(games.games(), (variation, game) => {
@@ -239,6 +240,7 @@ export default function Play(_md) {
         }
 
         res[fen].push({
+          depth: depths[variation],
           variation,
           uci: _.uci,
           ply: i

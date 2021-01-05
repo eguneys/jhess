@@ -7,7 +7,7 @@ import * as fixtures from './fixtures';
 export default () => {
   let play = new Play(fixtures.content);
 
-  console.log(play.export().depths);
+  console.log(play.export().fens);
 
   let situation = Situation.apply();
 
