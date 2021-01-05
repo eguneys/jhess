@@ -1,0 +1,17 @@
+{
+  "name": "jhess",
+  "version": "1.0.0",
+  "main": "lib/main.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src -d lib",
+    "start": "node lib/main",
+    "test": "yarn build && yarn start"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11"
+  },
+  "dependencies": {}
+}
