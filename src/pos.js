@@ -85,12 +85,18 @@ Pos.B1 = new PosKlass(1);
 Pos.C1 = new PosKlass(2);
 
 export const Pawn = {
-  forsyth: 'P',
+  forsyth: 'p',
   roleString: 'pawn'
 };
 
 export const Knight = {
-  forsyth: 'N',
+  color(color) {
+    return {
+      role: 'knight',
+      color
+    };
+  },
+  forsyth: 'n',
   roleString: 'knight',
   dirs: [
     _ => Pos.at(_.file.index - 1, _.rank.index + 2),
@@ -105,7 +111,13 @@ export const Knight = {
 };
 
 export const Bishop = {
-  forsyth: 'B',
+  color(color) {
+    return {
+      role: 'bishop',
+      color
+    };
+  },
+  forsyth: 'b',
   roleString: 'bishop',
   dirs: [_ => _.upLeft(), _ => _.upRight(), _ => _.downLeft(), _ => _.downRight()]
 };
@@ -117,13 +129,19 @@ export const Rook = {
       color
     };
   },
-  forsyth: 'R',
+  forsyth: 'r',
   roleString: 'rook',
   dirs: [_ => _.up(), _ => _.down(), _ => _.left(), _ => _.right()]
 };
 
 export const Queen = {
-  forsyth: 'Q',
+  color(color) {
+    return {
+      role: 'queen',
+      color
+    };
+  },
+  forsyth: 'q',
   roleString: 'queen',
   dirs: [Rook.dirs, Bishop.dirs].flat()
 };
@@ -135,7 +153,7 @@ export const King = {
       color
     };
   },
-  forsyth: 'K',
+  forsyth: 'k',
   roleString: 'king',
   dirs: Queen.dirs
 };

@@ -19,7 +19,12 @@ export default function Move({
 
   this.color = piece.color;
 
-  this.uci = this.orig.key + this.dest.key;
+  this.promotion = promotion;
+
+  if (promotion) {
+  } else {
+    this.uci = this.orig.key + this.dest.key;
+  }
   
   this.situationBefore = () => situationBefore;
   this.after = () => after;
@@ -34,6 +39,19 @@ export default function Move({
 
 
   this.withPromotion = op => {
+
+    if (!op) {
+      return this;
+    }
+
+    let b2 = after.take(dest),
+        b3 = b2.place(op.color(this.color), dest);
+
+    after = b3;
+    promotion = this.promotion = op;
+
+    this.uci += op.forsyth;
+
     return this;
   };
 

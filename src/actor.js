@@ -142,7 +142,7 @@ export default function Actor(piece, pos, board) {
         b4 = b3.place(Rook.color(color), newRookPos),
         b5 = b4;    
 
-    return [move(kingPos, b5, { castle })];
+    return [move(newKingPos, b5, { castle })];
   }
 
   function pawnDir() {

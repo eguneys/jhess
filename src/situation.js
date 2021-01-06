@@ -10,19 +10,16 @@ export default function Situation(board, color) {
       
   let actors = board.actorsOf()[color];
 
-  this.move = (from, to) => {
-    if (!to) {
-      to = from.substring(2, 4);
-      from = from.substring(0, 2);
-    }
+  this.moves = () => {
+    let res = {};
 
-    let actor = board.actorAt(from);
-
-    return toValid(actor, `No piece at ${from}`).flatMap(_ =>
-      toValid(_.pseudoValidMoves().find(_ =>
-        _.dest.key === to
-      ), `Piece cannot move to ${to}`)
-    );
+    actors.forEach(_ => {
+      let moves = _.pseudoValidMoves();
+      if (moves.length > 0) {
+        res[_.pos.key] = moves;
+      }
+    });
+    return res;
   };
 
   this.toFen = () => {

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel src -d lib",
     "start": "node lib/main",
-    "test": "yarn build && yarn start"
+    "test": "yarn build && node lib/testmain",
+    "prepublish": "yarn build"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",

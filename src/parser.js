@@ -2,6 +2,25 @@ import { valid, invalid } from './valid';
 import { Castle, Std } from './san';
 import { KingSide, QueenSide } from './side';
 import { Pos, Role, Pawn } from './pos';
+import { Uci } from './uci';
+
+export function parseUci(move) {
+
+  if (!(move.length === 4 || move.length === 5)) {
+    return invalid(`Invalid move.`);
+  }
+  
+  let orig = Pos.fromKey(move.substring(0, 2)),
+      dest = Pos.fromKey(move.substring(2, 4)),
+      promotion = Role.forsyth(move[4]);
+
+  if (!orig || !dest) {
+    return invalid('invalid move.');
+  }
+
+  return valid(new Uci(orig, dest, promotion));
+  
+}
 
 export function parseSan(san) {
 
@@ -24,6 +43,8 @@ export function parseSan(san) {
   let [_, role, file, rank, capture, pos, prom, check, mate] = match;
 
   let dest = Pos.fromKey(pos);
+
+  prom = Role.forsyth(prom);
 
   if (pos) {
     return valid(new Std(
